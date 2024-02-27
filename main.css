@@ -60,7 +60,7 @@ table{
 
 /*
 */
-.scroll-table-body {
+.continer .scroll-table-body {
 	height: calc(100vh - 250px);
 	overflow-x: auto;
 	margin-top: 0px;
@@ -90,6 +90,8 @@ table{
 	font-size: 14px;
 	vertical-align: top;
 }
+
+
 .upload{
 	background: #d0e6ff;
 	color: #333;
@@ -108,4 +110,26 @@ table{
 .upload:hover{
 	background: #b2d6ff;
 	transition: 0.3s;
+}
+.jcsb{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.endNow{
+	background: #50A0FF;
+	color: #fff;
+	font-weight: 300;
+	font-size: 14px;
+	padding: 10px 50px;
+	transition: 0.3s;
+	border-radius: 7px;
+}
+.endNow:hover{
+	cursor: pointer;
+	background: #417EC7;
+	transition: 0.3s;
+}
+h4{
+	margin: 10px;
 }

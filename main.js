@@ -1,6 +1,9 @@
-$('.continer').hide();
+$('.continer, .results').hide();
 let JSONsorted = [];
 let nowClust = 0;
+
+let createIntent = [];
+let addNewIntent = [];
 
 
 $('#csvFileInput').change(function(e) {
@@ -11,11 +14,12 @@ $('#csvFileInput').change(function(e) {
         dynamicTyping: true,
         complete: function(results) {
             var jsonData = results.data;
+            // console.log(jsonData);
             const groupedData = jsonData.reduce((acc, obj) => {
-                if (obj.claster_id !== null) {
-                    const key = obj.claster_id;
+                if (obj.cluster_ids !== null) {
+                    const key = obj.cluster_ids;
                     if (!acc[key]) {
-                        acc[key] = { claster_id: key, text: [] };
+                        acc[key] = { cluster_ids: key, text: [] };
                     }
                     acc[key].text.push(obj.text);
                 }
@@ -32,11 +36,29 @@ $('#csvFileInput').change(function(e) {
 
 
 function renderClust() {
-    $('h3 span').text(nowClust);
+    $('h3 span.nowClust').text(nowClust);
+    $('.allCls').text(JSONsorted.length - 1)
     $('tbody').html('');
     let textArr = JSONsorted[nowClust]['text'];
     for (var i = textArr.length - 1; i >= 0; i--) {
         $('tbody').append('<tr><td>' + textArr[i] + '</td></tr>');
+    }
+    if (JSONsorted.length - 1 == nowClust) {
+        goToResult();
+    }
+}
+
+
+
+function goToResult() {
+    $('.continer').slideUp(300);
+    $('.results').slideDown(300);
+
+    for (var i = createIntent.length - 1; i >= 0; i--) {
+        $('ul.createInt').append('<li>' + createIntent[i] + '</li>')
+    }
+    for (var i = addNewIntent.length - 1; i >= 0; i--) {
+        $('ul.editInt').append('<li>' + addNewIntent[i] + '</li>')
     }
 }
 
@@ -47,11 +69,9 @@ function goToNextClust() {
 }
 
 
-
 $('.skip').click(function() {
-   goToNextClust()
+ goToNextClust()
 })
-
 
 
 
@@ -62,4 +82,27 @@ function deb(argument) {
 
 $('.upload').click(function() {
     $('input').trigger('click');
+})
+
+
+function createIntentFun() {
+    createIntent.push(nowClust);
+}
+function addNewIntentFun() {
+   addNewIntent.push(nowClust);
+}
+
+
+
+$('.new').click(function() {
+    createIntentFun();
+    goToNextClust();
+})
+$('.update').click(function() {
+    addNewIntentFun();
+    goToNextClust();
+})
+
+$('.endNow').click(function() {
+    goToResult();
 })
