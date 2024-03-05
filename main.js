@@ -49,17 +49,17 @@ function renderClust() {
 }
 
 
-
 function goToResult() {
     $('.continer').slideUp(300);
     $('.results').slideDown(300);
 
     for (var i = createIntent.length - 1; i >= 0; i--) {
-        $('ul.createInt').append('<li>' + createIntent[i] + '</li>')
+        $('ul.createInt').append('<li>' + createIntent[i] + ' <button clID = "' + createIntent[i] + '">Просмотреть</button></li>')
     }
     for (var i = addNewIntent.length - 1; i >= 0; i--) {
-        $('ul.editInt').append('<li>' + addNewIntent[i] + '</li>')
+        $('ul.editInt').append('<li>' + addNewIntent[i] + ' <button clID = "' + addNewIntent[i] + '">Просмотреть</button></li>')
     }
+    $('.rend_lst tbody').html(' ');
 }
 
 
@@ -106,3 +106,24 @@ $('.update').click(function() {
 $('.endNow').click(function() {
     goToResult();
 })
+
+
+$("body").on("click", ".results ul button", function () {
+    getResultCopy($(this).attr('clID'))
+})
+
+
+function getResultCopy(idsRes) {
+    $('.rend_lst tbody').html(' ');
+    let textArr = JSONsorted[idsRes]['text'];
+    for (var i = textArr.length - 1; i >= 0; i--) {
+        $('.rend_lst tbody').append('<tr><td>' + textArr[i] + '</td></tr>');
+    }
+}
+
+$('.copyClastCP').click(function() {
+    copyClastCP();
+})
+function copyClastCP() {
+    
+}
