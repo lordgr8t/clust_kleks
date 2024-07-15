@@ -66,12 +66,20 @@ function goToResult() {
 function goToNextClust() {
     nowClust++;
     renderClust();
+    console.log("nowClust = " + nowClust)
 }
 
 
 $('.skip').click(function() {
- goToNextClust()
+   goToNextClust()
 })
+
+
+$(document).keydown(function(event) {
+  if (event.which === 39) {
+   goToNextClust()
+}
+});
 
 
 
@@ -89,7 +97,7 @@ function createIntentFun() {
     createIntent.push(nowClust);
 }
 function addNewIntentFun() {
-   addNewIntent.push(nowClust);
+ addNewIntent.push(nowClust);
 }
 
 
@@ -125,5 +133,5 @@ $('.copyClastCP').click(function() {
     copyClastCP();
 })
 function copyClastCP() {
-    
+
 }
