@@ -1,6 +1,6 @@
 $('.continer, .results').hide();
 let JSONsorted = [];
-let nowClust = 0;
+var nowClust = 0;
 
 let createIntent = [];
 let addNewIntent = [];
@@ -115,6 +115,11 @@ $('.endNow').click(function() {
     goToResult();
 })
 
+$('.jumpClust').click(function() {
+    nowClust = $('.inputJumpClust').val() - 1
+    goToNextClust();
+})
+
 
 $("body").on("click", ".results ul button", function () {
     getResultCopy($(this).attr('clID'))
@@ -132,6 +137,3 @@ function getResultCopy(idsRes) {
 $('.copyClastCP').click(function() {
     copyClastCP();
 })
-function copyClastCP() {
-
-}

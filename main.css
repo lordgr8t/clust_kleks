@@ -116,7 +116,7 @@ table{
 	justify-content: space-between;
 	align-items: center;
 }
-.endNow{
+.endNow, .jumpClust{
 	background: #50A0FF;
 	color: #fff;
 	font-weight: 300;
@@ -125,11 +125,17 @@ table{
 	transition: 0.3s;
 	border-radius: 7px;
 }
-.endNow:hover{
+.endNow:hover, .jumpClust:hover{
 	cursor: pointer;
 	background: #417EC7;
 	transition: 0.3s;
 }
 h4{
 	margin: 10px;
+}
+.inputJumpClust{
+	height: 33px;
+	margin-right: 7px;
+	border-radius: 5px;
+	padding-left: 7px;
 }
