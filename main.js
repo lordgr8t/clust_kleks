@@ -2,6 +2,8 @@ $('.continer, .results').hide();
 let JSONsorted = [];
 var nowClust = 0;
 
+var ResultCopy = 0;
+
 let createIntent = [];
 let addNewIntent = [];
 
@@ -71,14 +73,14 @@ function goToNextClust() {
 
 
 $('.skip').click(function() {
-   goToNextClust()
+ goToNextClust()
 })
 
 
 $(document).keydown(function(event) {
   if (event.which === 39) {
-   goToNextClust()
-}
+     goToNextClust()
+ }
 });
 
 
@@ -97,7 +99,7 @@ function createIntentFun() {
     createIntent.push(nowClust);
 }
 function addNewIntentFun() {
- addNewIntent.push(nowClust);
+   addNewIntent.push(nowClust);
 }
 
 
@@ -127,6 +129,7 @@ $("body").on("click", ".results ul button", function () {
 
 
 function getResultCopy(idsRes) {
+    ResultCopy = idsRes;
     $('.rend_lst tbody').html(' ');
     let textArr = JSONsorted[idsRes]['text'];
     for (var i = textArr.length - 1; i >= 0; i--) {
@@ -141,13 +144,34 @@ $('.copyClastCP').click(function() {
 
 
 $('button[clid]').click(function() {
-    
+
 })
 
 
 $("body").on("click", ".results ul button", function () {
     $('.results ul button').each(function() {
-    $(this).removeClass('activeBTN');
+        $(this).removeClass('activeBTN');
     })
     $(this).addClass('activeBTN');
 })
+
+
+function copyClastCP() {
+    const textBeforeResult = 'Кластер #' + ResultCopy;
+    const tableText = $('.rend_lst tbody tr').map(function() {
+        return $(this).find('td').text();
+    }).get().join('\n'); 
+    const finalText = `${textBeforeResult}\n\n${tableText}`;
+    const $temp = $('<textarea>').val(finalText).appendTo('body').select();
+    document.execCommand('copy');
+    $temp.remove();
+    notification("Скопированно")
+}
+
+
+function notification(notyText) {
+    $('.noty').text(notyText).addClass('active')
+    setTimeout(function() {
+        $('.noty').removeClass('active');
+    }, 1000);
+}
