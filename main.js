@@ -137,3 +137,17 @@ function getResultCopy(idsRes) {
 $('.copyClastCP').click(function() {
     copyClastCP();
 })
+
+
+
+$('button[clid]').click(function() {
+    
+})
+
+
+$("body").on("click", ".results ul button", function () {
+    $('.results ul button').each(function() {
+    $(this).removeClass('activeBTN');
+    })
+    $(this).addClass('activeBTN');
+})
